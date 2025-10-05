@@ -14,9 +14,9 @@ def video_receiver(client: socket.socket):
             image = Image.open(io.BytesIO(data))
             formatted_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             image.save(f"{config.SCREENSHOT_DIR}/{formatted_time}.png")
-            time.sleep(1)
-    except:
-        pass
+            time.sleep(3)
+    except Exception as e:
+        print("[VIDEO_SERVER_ERROR]", e)
 
 
 def audio_receiver(client: socket.socket):
@@ -35,7 +35,9 @@ def audio_receiver(client: socket.socket):
             if not data:
                 continue
             stream.write(data)
-            time.sleep(1)
+            time.sleep(3)
+    except Exception as e:
+        print("[AUDIO_SERVER_ERROR]", e)
     finally:
         stream.stop_stream()
         stream.close()
