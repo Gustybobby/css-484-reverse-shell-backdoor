@@ -8,7 +8,7 @@ def find_npp_task(client: socket.socket):
 
 
 def find_npp_dir(client: socket.socket) -> str:
-    return server.call_exec(client, "where /r C:\\Users *npp*")
+    return server.call_exec(client, "where /r C:\\Users *npp*.exe")
 
 
 def send_regsvr32(client: socket.socket, dir: str):
