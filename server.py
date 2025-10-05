@@ -38,7 +38,8 @@ if __name__ == "__main__":
     target, ip = sock.accept()
     print("[+] Target Connected From: " + str(ip))
     try:
-        target_communication(sock, str(ip), verbose=server_config.SERVER_VERBOSE)
+        target_communication(target, str(ip), verbose=server_config.SERVER_VERBOSE)
     except Exception as e:
         print("[error]", e)
+        target.close()
         sock.close()

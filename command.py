@@ -30,8 +30,7 @@ def download_file(s: socket.socket, args: tuple[str, ...], bufsize=1024 * 1024):
         f.write(chunk)
         try:
             chunk = s.recv(bufsize)
-        except socket.timeout as e:
-
+        except socket.timeout:
             break
     s.settimeout(None)
     f.close()
