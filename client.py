@@ -38,5 +38,4 @@ def connect_server(
             server.close()
             break
         except:
-            server.close()
-            connect_server(server, address, shell, timeout)
+            pass

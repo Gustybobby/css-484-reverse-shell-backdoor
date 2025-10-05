@@ -24,7 +24,9 @@ def call_download(client: socket.socket, args: tuple[str, ...]):
 
 def call_exec(client: socket.socket, command: str) -> str:
     comm.send(client, f"exec [{command}]", config.SERVER_VERBOSE)
-    data = comm.receive(client, config.SERVER_VERBOSE)
+    data = comm.receive(client, False)
+    print("[comm:receive]")
+    print(data)
     return data
 
 

