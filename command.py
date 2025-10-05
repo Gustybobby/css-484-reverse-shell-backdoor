@@ -25,6 +25,16 @@ def upload_file(s: socket.socket, args: tuple[str, ...], verbose=False):
     f.close()
 
 
+def upload_dir(args: tuple[str, ...], command_buffers: list[str], verbose=False):
+    for file_name in os.listdir(args[0]):
+        command_buffers.append(
+            f"upload [{args[0]}/{file_name}] [{args[1]}\\{file_name}]"
+        )
+        util.log(
+            f"[cmd:upload_dir] added 'upload {file_name}' to command buffers", verbose
+        )
+
+
 def download_file(
     s: socket.socket, args: tuple[str, ...], bufsize=1024 * 1024, verbose=False
 ):
@@ -66,4 +76,6 @@ def exec_command(s: socket.socket, args: tuple[str, ...]):
 
 
 def recv_exec_command(s: socket.socket):
-    print("[cmd:exec]", comm.receive(s))
+    data = comm.receive(s)
+    print("[cmd:exec]", data)
+    return data
