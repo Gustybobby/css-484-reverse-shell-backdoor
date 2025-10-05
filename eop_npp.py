@@ -22,7 +22,7 @@ def found_npp_handler(client: socket.socket):
     time.sleep(5)
 
 
-def event_loop(client: socket.socket):
+def script(client: socket.socket):
     found_npp = False
     while True:
         time.sleep(2)

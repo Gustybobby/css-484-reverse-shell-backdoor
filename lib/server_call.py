@@ -2,9 +2,9 @@ import socket
 from . import cmd, comm, config, logger
 
 
-def open_server():
+def open_server(address: tuple[str, int]):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.bind((config.IP, config.PORT))
+    sock.bind(address)
     logger.debug("[+] Listening for incoming connections", config.SERVER_VERBOSE)
     sock.listen(5)
     client, ip = sock.accept()

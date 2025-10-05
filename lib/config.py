@@ -1,5 +1,7 @@
 IP = "192.168.100.4"
-PORT = 5555
+
+EOP_PORT = 10000
+ITR_PORT = 10001
 
 # Server config
 

