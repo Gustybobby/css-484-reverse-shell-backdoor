@@ -9,6 +9,11 @@ def send(sock: socket.socket, data, verbose: bool):
     logger.debug(f"[comm:send] {data}", verbose)
 
 
+def sendall(sock: socket.socket, data, verbose: bool):
+    sock.sendall(data)
+    logger.debug(f"[comm:send]", verbose)
+
+
 def receive(sock: socket.socket, verbose: bool):
     data = ""
     error = ""
@@ -25,3 +30,24 @@ def receive(sock: socket.socket, verbose: bool):
         count += 1
 
     raise ValueError(f"[comm:receive] error: {error}")
+
+
+def multireceive(sock: socket.socket, verbose: bool) -> bytes:
+    bufsize = 1024 * 1024  # 1 MB
+
+    sock.settimeout(1)
+    data = bytes()
+    chunk = sock.recv(bufsize)
+    while chunk:
+        data += chunk
+        logger.debug(
+            f"[cmd:multireceive] received {len(data)} bytes ({len(data) / 1024} KB)",
+            verbose,
+        )
+        try:
+            chunk = sock.recv(bufsize)
+        except socket.timeout:
+            break
+    sock.settimeout(None)
+
+    return data
