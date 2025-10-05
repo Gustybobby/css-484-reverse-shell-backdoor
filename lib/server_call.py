@@ -13,13 +13,13 @@ def open_server():
 
 
 def call_upload(client: socket.socket, args: tuple[str, ...]):
-    comm.send(client, f"download [{args[0]}] [{args[1]}]", config.SERVER_VERBOSE)
+    comm.send(client, f"upload [{args[0]}] [{args[1]}]", config.SERVER_VERBOSE)
     cmd.upload(client, args, config.SERVER_VERBOSE)
 
 
 def call_download(client: socket.socket, args: tuple[str, ...]):
-    comm.send(client, f"upload [{args[0]}] [{args[1]}]", config.SERVER_VERBOSE)
-    cmd.upload(client, args, config.SERVER_VERBOSE)
+    comm.send(client, f"download [{args[0]}] [{args[1]}]", config.SERVER_VERBOSE)
+    cmd.download(client, args, config.SERVER_VERBOSE)
 
 
 def call_exec(client: socket.socket, command: str) -> str:
