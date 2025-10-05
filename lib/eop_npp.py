@@ -1,6 +1,6 @@
 import socket
 import time
-from lib import config, server
+from . import config, server
 
 
 def find_npp_task(client: socket.socket):

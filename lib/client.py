@@ -1,7 +1,7 @@
 import socket
 import time
 from typing import Callable
-from lib import cmd, comm, config, string_utils
+from . import cmd, comm, config, string_utils
 
 
 def shell(server: socket.socket):
