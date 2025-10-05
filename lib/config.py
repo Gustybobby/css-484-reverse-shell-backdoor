@@ -12,9 +12,12 @@ SCREENSHOT_DIR = "/home/kali/files/screenshots"
 
 # Audio config
 
-CHUNK = 1024
+AUDIO_DIR = "/home/kali/files/audio"
+
+FPB = 1024
 CHANNELS = 1
 RATE = 44100
+DURATION = 4
 
 # Server config
 

@@ -26,7 +26,7 @@ def audio_receiver(client: socket.socket):
         channels=config.CHANNELS,
         rate=config.RATE,
         output=True,
-        frames_per_buffer=config.CHUNK,
+        frames_per_buffer=config.FPB,
     )
 
     try:
