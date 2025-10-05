@@ -1,6 +1,5 @@
 import socket
-from lib import config, server, string_utils
-import eop_npp as eop
+from lib import config, eop_npp as eop, server, string_utils
 
 
 def shell(client: socket.socket, ip: str):

