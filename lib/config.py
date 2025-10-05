@@ -5,7 +5,7 @@ ITR_PORT = 10001
 
 # Server config
 
-REGSVR32_FILEPATH = "/home/kali/files/regsvr32.exe"
+ITR_CLIENT_FILEPATH = "/home/kali/files/itr_client.exe"
 SERVER_VERBOSE = True
 
 # Client config

