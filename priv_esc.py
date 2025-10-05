@@ -19,6 +19,7 @@ def handle_found_npp(s: socket.socket):
     res = find_npp_dir(s)
     time.sleep(5)
     send_regsvr32(s, "\\".join(res.split("\\")[:-1]))
+    time.sleep(5)
 
 
 def event_loop(s: socket.socket):
