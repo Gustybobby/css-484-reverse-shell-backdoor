@@ -3,6 +3,7 @@ import re
 import os
 import subprocess
 import communication as comm
+import debug_util as util
 
 
 def extract_command(command: str) -> tuple[str, tuple[str, ...]]:
@@ -16,18 +17,28 @@ def cd(args: tuple[str, ...]):
     os.chdir(args[0])
 
 
-def upload_file(s: socket.socket, args: tuple[str, ...]):
+def upload_file(s: socket.socket, args: tuple[str, ...], verbose=False):
     f = open(args[0], "rb")
-    s.send(f.read())
+    data = f.read()
+    util.log(f"[cmd:upload] sending {len(data)} bytes ({len(data) / 1024} KB)", verbose)
+    s.send(data)
     f.close()
 
 
-def download_file(s: socket.socket, args: tuple[str, ...], bufsize=1024 * 1024):
+def download_file(
+    s: socket.socket, args: tuple[str, ...], bufsize=1024 * 1024, verbose=False
+):
     f = open(args[1], "wb")
     s.settimeout(1)
+    total_bytes = 0
     chunk = s.recv(bufsize)
     while chunk:
         f.write(chunk)
+        total_bytes += len(chunk)
+        util.log(
+            f"[cmd:download] received {total_bytes} bytes ({total_bytes / 1024} KB)",
+            verbose,
+        )
         try:
             chunk = s.recv(bufsize)
         except socket.timeout:
