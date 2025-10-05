@@ -6,6 +6,10 @@ KLG_PORT = 10002
 VDO_PORT = 10003
 AUD_PORT = 10004
 
+# Video config
+
+SCREENSHOT_DIR = "/home/kali/files/screenshots"
+
 # Audio config
 
 CHUNK = 1024

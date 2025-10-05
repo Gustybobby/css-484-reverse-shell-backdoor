@@ -1,5 +1,6 @@
 import socket
 import time
+from datetime import datetime
 import io
 import pyaudio
 from PIL import Image
@@ -11,7 +12,8 @@ def video_receiver(client: socket.socket):
         while True:
             data = comm.multireceive(client, config.SERVER_VERBOSE)
             image = Image.open(io.BytesIO(data))
-            image.show("screenshot")
+            formatted_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            image.save(f"{config.SCREENSHOT_DIR}/{formatted_time}.png")
             time.sleep(1)
     except:
         pass
