@@ -2,6 +2,7 @@ IP = "192.168.100.4"
 
 EOP_PORT = 10000
 ITR_PORT = 10001
+KLG_PORT = 10002
 
 # Server config
 
