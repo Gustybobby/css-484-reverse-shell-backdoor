@@ -9,10 +9,12 @@ AUD_PORT = 10004
 # Video config
 
 SCREENSHOT_DIR = "/home/kali/files/screenshots"
+CLIENT_SCREENSHOT_DIR = "./screenshots"
 
 # Audio config
 
 AUDIO_DIR = "/home/kali/files/audio"
+CLIENT_AUDIO_DIR = "./audio"
 
 FPB = 1024
 CHANNELS = 1

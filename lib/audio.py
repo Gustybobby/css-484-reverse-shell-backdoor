@@ -1,3 +1,4 @@
+import os
 import pyaudio
 import wave
 from . import config
@@ -6,6 +7,8 @@ frames = []
 
 
 def record(cycle_size: int):
+    if not os.path.exists(config.CLIENT_AUDIO_DIR):
+        os.mkdir(config.CLIENT_AUDIO_DIR)
 
     fps = int(config.RATE / config.FPB * config.DURATION)
 
@@ -27,13 +30,14 @@ def record(cycle_size: int):
                 clip = []
                 for i in range(0, fps):
                     clip.append(frames[i])
-                fname = f"./{str(count % cycle_size)}.wav"
+                fname = f"{config.CLIENT_AUDIO_DIR}/{str(count % cycle_size)}.wav"
                 wavefile = config_wav(fname, p)
                 wavefile.writeframes(b"".join(clip))
                 wavefile.close()
                 frames = frames[config.DURATION - 1 :]
                 count += 1
-    except:
+    except Exception as e:
+        print("[AUDIO_CLIENT_ERROR]", e)
         stream.stop_stream()
 
 

