@@ -20,9 +20,9 @@ def shell(s: socket.socket, verbose=False):
             cmd.cd(args)
         # (download|upload) [source] [target]
         elif func == "download":
-            cmd.upload_file(s, args, verbose)
+            cmd.upload_file(s, args, verbose=verbose)
         elif func == "upload":
-            cmd.download_file(s, args, verbose)
+            cmd.download_file(s, args, verbose=verbose)
         # exec [func] [...args]
         elif func == "exec":
             cmd.exec_command(s, args)
