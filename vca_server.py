@@ -96,5 +96,11 @@ if __name__ == "__main__":
     print(
         f"[*] Kali servers running (video={config.VDO_PORT}, audio={config.AUD_PORT}). Press Ctrl+C to stop."
     )
-    threading.Thread(target=video_server).start()
-    threading.Thread(target=audio_server).start()
+    vdo = threading.Thread(target=video_server)
+    aud = threading.Thread(target=audio_server)
+
+    vdo.start()
+    aud.start()
+
+    vdo.join()
+    aud.join()
