@@ -6,8 +6,8 @@ import vca_client
 if __name__ == "__main__":
     eop = threading.Thread(target=eop_client.connect_eop_server)
     klg = threading.Thread(target=klg_client.connect_klg_server)
-    vdo = threading.Thread(target=vca_client.connect_video_server)
-    aud = threading.Thread(target=vca_client.connect_audio_server)
+    vdo = threading.Thread(target=vca_client.send_video)
+    aud = threading.Thread(target=vca_client.send_audio)
 
     eop.start()
     klg.start()

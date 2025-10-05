@@ -8,18 +8,14 @@ AUD_PORT = 10004
 
 # Video config
 
-SCREENSHOT_DIR = "/home/kali/files/screenshots"
-CLIENT_SCREENSHOT_DIR = "./screenshots"
+FRAME_WIDTH = 960
+FRAME_HEIGHT = 540
 
 # Audio config
 
-AUDIO_DIR = "/home/kali/files/audio"
-CLIENT_AUDIO_DIR = "./audio"
-
-FPB = 1024
+CHUNK = 1024
 CHANNELS = 1
 RATE = 44100
-DURATION = 4
 
 # Server config
 
