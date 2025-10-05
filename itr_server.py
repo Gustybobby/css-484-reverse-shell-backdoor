@@ -1,5 +1,5 @@
 import socket
-from lib import config, server_call as server, string_utils
+from lib import config, server, string_utils
 import eop_npp as eop
 
 

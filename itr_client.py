@@ -1,5 +1,5 @@
 import socket
-from client import connect_server, shell
+from lib.client import connect_server, shell
 from lib import config
 
 if __name__ == "__main__":
