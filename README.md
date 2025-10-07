@@ -85,6 +85,7 @@ pip install -r requirements.txt
 ```
 
 3. Setup audio
+
 Linux machine has some audio issues with the libc that `pyaudio` uses.
 ```bash
 sudo apt update
