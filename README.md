@@ -84,13 +84,20 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-3. Install gnome-terminal
+3. Setup audio
+Linux machine has some audio issues with the libc that `pyaudio` uses.
+```bash
+sudo apt update
+sudo apt install -y portaudio19-dev
+```
+
+4. Install gnome-terminal
 ```bash
 sudo apt update
 sudo apt install gnome-terminal
 ```
 
-4. Setup EOP payload
+5. Setup EOP payload
 
 Put `/dist/itr_client.exe` into `ITR_CLIENT_FILEPATH`. The default filepath is `/home/kali/files/itr_client.exe`.
 
